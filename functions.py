@@ -61,16 +61,68 @@ def mostrar_tarea(tareas):
             print(f"{i['id']} | {i['titulo']} | {i['descripcion']} | {i['estado']}")
 
 def marcar_completada(tareas):
-    pass
+    if len(tareas) == 0:
+        print("No hay tareas registradas")
+        return
+
+    tareas_pendientes = "Pendiente"
+    tareas_completadas = "Completada"
+
+    
+    if not any(i["estado"] == tareas_pendientes for i in tareas):
+        print("No hay tareas pendientes.")
+        return
+    
+
+    #Alternativa usando all():
+    # Verifica si todas las tareas están completadas
+    
+    """
+    if all(i["estado"] == tareas_completadas for i in tareas):
+        print("No hay tareas pendientes.")
+        return
+    """
+    
+    id_encontrado = False
+
+    while not id_encontrado:
+
+        for i in tareas:
+            if i["estado"] == tareas_pendientes:
+                print(f"{i['id']} | {i['titulo']} | {i['estado']}")
+
+        id_select = input("Digita el ID de la tarea completada: ").strip()
+
+        while not id_select.isdigit():
+            print("ID invalido, intente nuevamente...")
+            id_select = input("Digita el ID de la tarea completada: ").strip()
+
+        id_select = int(id_select)
+
+        for i in tareas:
+            if i["id"] == id_select:
+                if i["estado"] == tareas_pendientes:
+                    i["estado"] = tareas_completadas
+                    print(f"El estado de la tarea {i['id']} {i['titulo']} cambió a {i['estado']}")
+                    mostrar_tarea(tareas)
+                    id_encontrado = True
+                else:
+                    print("Esa tarea ya está completada!")
+                    id_encontrado = True
+                break
+
+        if not id_encontrado:
+            print("ID no encontrado, intentar nuevamente...")
+            
+                
+            
+        
+def editar_tarea(tareas):
+    pass        
 
 def eliminar_tarea(tareas):
     pass
 
 def filtrar_tareas(tareas):
     pass
-
-def editar_tarea(tareas):
-    pass
-
-
 
