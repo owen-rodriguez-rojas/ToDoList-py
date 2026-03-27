@@ -54,7 +54,11 @@ def crear_tarea(tareas):
         
 
 def mostrar_tarea(tareas):
-    pass
+    if len(tareas) == 0:
+        print("No hay tareas registradas")
+    else:
+        for i in tareas:
+            print(f"{i['id']} | {i['titulo']} | {i['descripcion']} | {i['estado']}")
 
 def marcar_completada(tareas):
     pass
@@ -63,6 +67,9 @@ def eliminar_tarea(tareas):
     pass
 
 def filtrar_tareas(tareas):
+    pass
+
+def editar_tarea(tareas):
     pass
 
 
