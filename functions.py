@@ -1,5 +1,5 @@
 import json
-
+from validaciones import insert_text, insert_id_or_num, confirmacion
 
 
 def cargar_datos():
@@ -19,15 +19,9 @@ def guardar_datos(tareas):
 def crear_tarea(tareas):
     seguir = "s"
     while seguir != "n":
-        titulo = input("Titulo de la tarea: ").strip()
-        while titulo == "":
-            print("Titulo no valido, intente nuevamente...")
-            titulo = input("Titulo de la tarea: ").strip()
+        titulo = insert_text("Titulo de la tarea: ")
     
-        descripcion = input("Descripcion de la tarea: ").strip()
-        while descripcion == "":
-            print("Descripción Invalida...")    
-            descripcion = input("Descripcion de la tarea: ").strip()
+        descripcion = insert_text("Descripcion de la tarea: ")
         
         if not tareas:
             last_id = 1
@@ -44,24 +38,21 @@ def crear_tarea(tareas):
         tareas.append(datos)
         print(f"Tarea {last_id} {titulo} Agregada Exitosamente")
         
-        validacion_seguir = input("¿Desea agregar otra tarea? (s/n): ").strip().lower()
-        while validacion_seguir not in ("s", "n"):
-            print("Valor incorrecto...")
-            validacion_seguir = input("¿Desea agregar otra tarea? (s/n): ").strip().lower()
-        seguir = validacion_seguir
+        seguir = validacion_seguir = confirmacion("¿Desea agregar otra tarea? (s/n): ")
+        
        
         
         
 
 def mostrar_tarea(tareas):
-    if len(tareas) == 0:
+    if not tareas:
         print("No hay tareas registradas")
     else:
         for i in tareas:
             print(f"{i['id']} | {i['titulo']} | {i['descripcion']} | {i['estado']}")
 
 def marcar_completada(tareas):
-    if len(tareas) == 0:
+    if not tareas:
         print("No hay tareas registradas")
         return
 
@@ -91,13 +82,7 @@ def marcar_completada(tareas):
             if i["estado"] == tareas_pendientes:
                 print(f"{i['id']} | {i['titulo']} | {i['estado']}")
 
-        id_select = input("Digita el ID de la tarea completada: ").strip()
-
-        while not id_select.isdigit():
-            print("ID invalido, intente nuevamente...")
-            id_select = input("Digita el ID de la tarea completada: ").strip()
-
-        id_select = int(id_select)
+        id_select = insert_id_or_num("Digita el ID de la tarea completada :")
 
         for i in tareas:
             if i["id"] == id_select:
@@ -118,11 +103,127 @@ def marcar_completada(tareas):
             
         
 def editar_tarea(tareas):
-    pass        
+    if not tareas:
+            print("No hay tareas registradas")
+            return
+        
+        
+    id_encontrado = False
+    
+    while not id_encontrado:
+        mostrar_tarea(tareas)
+        
+        id_select = insert_id_or_num("Digita el ID de la tarea a modificar: ")
+    
+        for i in tareas:
+            if i["id"] == id_select:
+                id_encontrado = True
+                seguir = "s"
+                print("Tarea encontrada: \n")
+                print(f"{i['id']} | {i['titulo']} | {i['descripcion']} | {i['estado']}")
+                
+                while seguir != "n":
+                    print("1. Titulo\n2. Descripcion\n3. Estado") 
+                    
+                    modif = insert_id_or_num("¿Qué campo deseas modificar? ")
+                    
+                    if modif == 1:
+                        print(i["titulo"])
+                        titulo = insert_text("Inserta el nuevo titulo: ")
+                        i["titulo"] = titulo
+                        print("Cambio Exitoso")
+                    elif modif == 2:
+                        print(i["descripcion"])
+                        descripcion = insert_text("Inserta la nueva descripcion: ")
+                        i["descripcion"] = descripcion
+                        print("Cambio Exitoso")
+                    elif modif == 3:
+                        estado = 0
+                        while estado not in (1, 2):
+                            print("1. Completada\n2. Pendiente")
+                            estado = insert_id_or_num("Ingresa un valor: ")
+                            if estado not in (1, 2):
+                                print("Numero fuera de rango...")
+                        if estado == 1:
+                            i["estado"] = "Completada"
+                        elif estado == 2:
+                            i["estado"] = "Pendiente"
+                            
+                    else:
+                        print("Numero fuera de rango")
+                        continue
+                    
+                    print("¡Cambio Exitoso!\n")
+                    print("\nDatos Actualizados: ")
+                    print(i["id"], "|", i["titulo"], "|", i["descripcion"], "|", i["estado"])
+                    
+                    seguir = confirmacion("¿Desea modificar otro campo? (s/n): ")
+                    
+        if not id_encontrado:
+            print("ID no encontrado, internar nuevamente...")
+               
+            
 
 def eliminar_tarea(tareas):
-    pass
+    if not tareas:
+            print("No hay tareas registradas")
+            return
+    
+    seguir = "s"
+    while seguir != "n":
+        mostrar_tarea(tareas)
+        id_select = insert_id_or_num("Inserta el ID de la tarea a eliminar: ")
+        
+        id_encontrado = False
+        for i in tareas:
+            if i["id"] == id_select:
+                id_encontrado = True
+                print("Tarea Encontrada: ")
+                print(f"{i['id']} | {i['titulo']} | {i['descripcion']} | {i['estado']}")
+                opc = confirmacion("¿Esta seguro que desea eliminar esta tarea? (s/n): ")
+                
+                if opc == "s":
+                    tareas.remove(i)
+                    print("Tarea Eliminada con Exito")
+                    mostrar_tarea(tareas)
+                else:
+                    print("Cancelando Eliminacion...")
+                    break
+        
+        if not id_encontrado:
+            print("ID no encontrado, intente nuevamente...")
+            continue
+        
+        seguir = confirmacion("¿Desea eliminar otra tarea? (s/n): ")
+                    
+                                       
+    
 
 def filtrar_tareas(tareas):
-    pass
-
+    if not tareas:
+        print("No hay tareas registradas")
+        return
+    
+    print("\n1.Completadas\n2.Pendientes")
+    opc = insert_id_or_num("¿Que tareas deseas visualizar?: ")
+    
+ 
+    if opc == 1:
+        if not any(i["estado"] == "Completada" for i in tareas):
+            print("No hay tareas completadas.")
+        else: 
+            for i in tareas:
+                if i["estado"] == "Completada":
+                    print(f"{i['id']} | {i['titulo']} | {i['descripcion']} | {i['estado']}")
+                        
+    elif opc == 2:
+        if not any(i["estado"] == "Pendiente" for i in tareas):
+            print("No hay tareas pendientes.") 
+        else:
+            for i in tareas:
+                if i["estado"] == "Pendiente":
+                    print(f"{i['id']} | {i['titulo']} | {i['descripcion']} | {i['estado']}")
+     
+    else:
+        print("Numero fuera de rango...")
+                         
