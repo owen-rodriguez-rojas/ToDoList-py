@@ -35,7 +35,6 @@ Aplicar los conocimientos básicos de Python para construir una aplicación func
   - Título
   - Descripción
   - Estado (Pendiente / Completada)
-  - Fecha de creación (opcional)
 
 ### ✅ Marcar tarea como completada
 - Permite seleccionar una tarea por su ID
@@ -96,25 +95,33 @@ El sistema incluye:
 ---
 
 ## 📂 Estructura del proyecto
+```
 ToDoList-py/  
-├── main.py → Menú principal del sistema  
-├── funciones.py → Lógica del programa (crear, mostrar, marcar completada, editar, eliminar, filtrar)  
-├── data.json → Almacenamiento de tareas  
-└── README.md → Documentación del proyecto  
+├── main.py          → Menú principal del sistema  
+├── funciones.py     → Lógica del programa (crear, mostrar, marcar completada, editar, eliminar, filtrar)  
+├── validaciones.py  → Funciones auxiliares de validación de entradas  
+├── data.json        → Almacenamiento de tareas  
+└── README.md        → Documentación del proyecto  
+```
 
 ---
 
 ## 🚀 Cómo ejecutar
 
 1. Clonar el repositorio:
-   ```bash
+```bash
    git clone https://github.com/owen-rodriguez-rojas/ToDoList-py
+```
 
 2. Entrar al proyecto:
-    cd ToDoList-py
+```bash
+   cd ToDoList-py
+```
 
 3. Ejecutar el programa:
-    python main.py
+```bash
+   python main.py
+```
 
 ---
 
@@ -133,8 +140,7 @@ Durante este proyecto se desarrollaron habilidades como:
 
 ## 🚀 Próximas mejoras
 - Agregar prioridad a tareas (Alta, Media, Baja)
-- Implementar edición de tareas completa
-- Agregar fechas con datetime
+- Agregar fechas con `datetime`
 - Búsqueda de tareas por texto
 - Interfaz gráfica (Tkinter)
 - Versión web (Flask o FastAPI)
