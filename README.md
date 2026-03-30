@@ -3,7 +3,7 @@
 ## 📌 Descripción
 Este proyecto consiste en el desarrollo de un gestor de tareas (To-Do List) en consola utilizando Python.
 
-Permite administrar tareas mediante operaciones fundamentales como crear, visualizar, completar, eliminar y filtrar tareas, incorporando persistencia de datos mediante archivos JSON.
+Permite administrar tareas mediante operaciones fundamentales como crear, visualizar, completar, eliminar, filtrar y editar tareas, incorporando persistencia de datos mediante archivos JSON.
 
 ---
 
@@ -13,6 +13,7 @@ Aplicar los conocimientos básicos de Python para construir una aplicación func
 - Crear tareas
 - Visualizar tareas
 - Marcar tareas como completadas
+- Editar tareas
 - Eliminar tareas
 - Filtrar tareas por estado
 - Guardar información de manera persistente
@@ -22,7 +23,7 @@ Aplicar los conocimientos básicos de Python para construir una aplicación func
 ## ⚙️ Funcionalidades
 
 ### ➕ Crear tarea
-- Solicita título y descripción (opcional)
+- Solicita título y descripción
 - Genera un ID único automático
 - Asigna estado inicial: **Pendiente**
 - Registra la tarea en el sistema
@@ -32,12 +33,18 @@ Aplicar los conocimientos básicos de Python para construir una aplicación func
 - Muestra:
   - ID
   - Título
+  - Descripción
   - Estado (Pendiente / Completada)
   - Fecha de creación (opcional)
 
 ### ✅ Marcar tarea como completada
 - Permite seleccionar una tarea por su ID
 - Cambia su estado a **Completada**
+
+### ✏️ Editar tarea
+- Permite seleccionar una tarea por su ID
+- Modificar título, descripción o estado
+- Incluye validación de datos
 
 ### ❌ Eliminar tarea
 - Permite seleccionar una tarea por su ID
@@ -89,32 +96,29 @@ El sistema incluye:
 ---
 
 ## 📂 Estructura del proyecto
-ToDoList-py/
-├── main.py → Menú principal del sistema
-├── funciones.py → Lógica del programa
-├── data.json → Almacenamiento de tareas
-└── README.md → Documentación del proyecto
-
----
-
+ToDoList-py/  
+├── main.py → Menú principal del sistema  
+├── funciones.py → Lógica del programa (crear, mostrar, marcar completada, editar, eliminar, filtrar)  
+├── data.json → Almacenamiento de tareas  
+└── README.md → Documentación del proyecto  
 
 ---
 
 ## 🚀 Cómo ejecutar
 
 1. Clonar el repositorio:
-
+   ```bash
+   git clone https://github.com/owen-rodriguez-rojas/ToDoList-py
 
 2. Entrar al proyecto:
-  cd ToDoList-py
-
+    cd ToDoList-py
 
 3. Ejecutar el programa:
-   python main.py
+    python main.py
 
 ---
 
-##🎓 Aprendizajes
+## 🎓 Aprendizajes
 
 Durante este proyecto se desarrollaron habilidades como:
 
@@ -127,16 +131,15 @@ Durante este proyecto se desarrollaron habilidades como:
 
 ---
 
-##🚀 Próximas mejoras
-Agregar prioridad a tareas (Alta, Media, Baja)
-Implementar edición de tareas
-Agregar fechas con datetime
-Búsqueda de tareas por texto
-Interfaz gráfica (Tkinter)
-Versión web (Flask o FastAPI)
+## 🚀 Próximas mejoras
+- Agregar prioridad a tareas (Alta, Media, Baja)
+- Implementar edición de tareas completa
+- Agregar fechas con datetime
+- Búsqueda de tareas por texto
+- Interfaz gráfica (Tkinter)
+- Versión web (Flask o FastAPI)
 
 ---
 
-##🧑‍💻 Autor
-
+## 🧑‍💻 Autor
 - Owen Rojas
