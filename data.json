@@ -1,1 +1,20 @@
-[]
+[
+    {
+        "id": 1,
+        "titulo": "Estudiar Git",
+        "descripcion": "Estudiar los fundamentos de Git y practicar con proyectos personales",
+        "estado": "Completada"
+    },
+    {
+        "id": 2,
+        "titulo": "Estudiar Python",
+        "descripcion": "Estudiar los fundamentos de Python y reforzar la logica de programacion",
+        "estado": "Pendiente"
+    },
+    {
+        "id": 4,
+        "titulo": "Estudiar Python Backend",
+        "descripcion": "Estudiar Python para backend y aprender APIs",
+        "estado": "Pendiente"
+    }
+]

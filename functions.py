@@ -49,7 +49,7 @@ def mostrar_tarea(tareas):
         print("No hay tareas registradas")
     else:
         for i in tareas:
-            print(f"{i['id']} | {i['titulo']} | {i['descripcion']} | {i['estado']}")
+            print(f"{i['id']} | {i['titulo']} | \n | {i['descripcion']} | {i['estado']}")
 
 def marcar_completada(tareas):
     if not tareas:
@@ -113,7 +113,7 @@ def editar_tarea(tareas):
     while not id_encontrado:
         mostrar_tarea(tareas)
         
-        id_select = insert_id_or_num("Digita el ID de la tarea a modificar: ")
+        id_select = insert_id_or_num("\nDigita el ID de la tarea a modificar: ")
     
         for i in tareas:
             if i["id"] == id_select:
@@ -123,27 +123,27 @@ def editar_tarea(tareas):
                 print(f"{i['id']} | {i['titulo']} | {i['descripcion']} | {i['estado']}")
                 
                 while seguir != "n":
-                    print("1. Titulo\n2. Descripcion\n3. Estado") 
+                    print("\n1. Titulo\n2. Descripcion\n3. Estado") 
                     
-                    modif = insert_id_or_num("¿Qué campo deseas modificar? ")
+                    modif = insert_id_or_num("\n¿Qué campo deseas modificar?: ")
                     
                     if modif == 1:
                         print(i["titulo"])
-                        titulo = insert_text("Inserta el nuevo titulo: ")
+                        titulo = insert_text("\nInserta el nuevo titulo: ")
                         i["titulo"] = titulo
                         print("Cambio Exitoso")
                     elif modif == 2:
                         print(i["descripcion"])
-                        descripcion = insert_text("Inserta la nueva descripcion: ")
+                        descripcion = insert_text("\nInserta la nueva descripcion: ")
                         i["descripcion"] = descripcion
                         print("Cambio Exitoso")
                     elif modif == 3:
                         estado = 0
                         while estado not in (1, 2):
-                            print("1. Completada\n2. Pendiente")
-                            estado = insert_id_or_num("Ingresa un valor: ")
+                            print("\n1. Completada\n2. Pendiente")
+                            estado = insert_id_or_num("\nIngresa un valor: ")
                             if estado not in (1, 2):
-                                print("Numero fuera de rango...")
+                                print("\nNumero fuera de rango...")
                         if estado == 1:
                             i["estado"] = "Completada"
                         elif estado == 2:
@@ -157,7 +157,7 @@ def editar_tarea(tareas):
                     print("\nDatos Actualizados: ")
                     print(i["id"], "|", i["titulo"], "|", i["descripcion"], "|", i["estado"])
                     
-                    seguir = confirmacion("¿Desea modificar otro campo? (s/n): ")
+                    seguir = confirmacion("\n¿Desea modificar otro campo? (s/n): ")
                     
         if not id_encontrado:
             print("ID no encontrado, internar nuevamente...")
@@ -178,23 +178,23 @@ def eliminar_tarea(tareas):
         for i in tareas:
             if i["id"] == id_select:
                 id_encontrado = True
-                print("Tarea Encontrada: ")
+                print("\nTarea Encontrada: ")
                 print(f"{i['id']} | {i['titulo']} | {i['descripcion']} | {i['estado']}")
-                opc = confirmacion("¿Esta seguro que desea eliminar esta tarea? (s/n): ")
+                opc = confirmacion("\n¿Esta seguro que desea eliminar esta tarea? (s/n): ")
                 
                 if opc == "s":
                     tareas.remove(i)
-                    print("Tarea Eliminada con Exito")
+                    print("\nTarea Eliminada con Exito")
                     mostrar_tarea(tareas)
                 else:
-                    print("Cancelando Eliminacion...")
+                    print("\nCancelando Eliminacion...")
                     break
         
         if not id_encontrado:
             print("ID no encontrado, intente nuevamente...")
             continue
         
-        seguir = confirmacion("¿Desea eliminar otra tarea? (s/n): ")
+        seguir = confirmacion("\n¿Desea eliminar otra tarea? (s/n): ")
                     
                                        
     
@@ -205,12 +205,12 @@ def filtrar_tareas(tareas):
         return
     
     print("\n1.Completadas\n2.Pendientes")
-    opc = insert_id_or_num("¿Que tareas deseas visualizar?: ")
+    opc = insert_id_or_num("\n¿Que tareas deseas visualizar?: ")
     
  
     if opc == 1:
         if not any(i["estado"] == "Completada" for i in tareas):
-            print("No hay tareas completadas.")
+            print("\nNo hay tareas completadas.")
         else: 
             for i in tareas:
                 if i["estado"] == "Completada":
@@ -218,7 +218,7 @@ def filtrar_tareas(tareas):
                         
     elif opc == 2:
         if not any(i["estado"] == "Pendiente" for i in tareas):
-            print("No hay tareas pendientes.") 
+            print("\nNo hay tareas pendientes.") 
         else:
             for i in tareas:
                 if i["estado"] == "Pendiente":
